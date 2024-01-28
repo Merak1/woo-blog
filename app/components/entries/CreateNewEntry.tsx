@@ -12,7 +12,6 @@ const CreateNewEntry = () => {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isEntryCreated, setIsEntryCreated] = useState(false);
 
   const {
     register,
@@ -34,7 +33,6 @@ const CreateNewEntry = () => {
       .post("/api/blog", data)
       .then(() => {
         toast.success("Product created successfully");
-        setIsEntryCreated(true);
       })
       .catch((error: any) => {
         toast.error("Something went wrong please try again", error);
