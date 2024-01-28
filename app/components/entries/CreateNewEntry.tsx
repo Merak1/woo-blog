@@ -17,6 +17,7 @@ const CreateNewEntry = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
@@ -39,6 +40,7 @@ const CreateNewEntry = () => {
         toast.error("Something went wrong please try again", error);
       })
       .finally(() => {
+        reset();
         router.refresh();
         setIsLoading(false);
       });
