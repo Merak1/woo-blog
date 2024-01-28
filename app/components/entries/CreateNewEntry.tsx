@@ -6,8 +6,11 @@ import TextArea from "../inputs/TextArea";
 import Button from "../inputs/Button";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const CreateNewEntry = () => {
+  const router = useRouter();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEntryCreated, setIsEntryCreated] = useState(false);
 
@@ -36,6 +39,7 @@ const CreateNewEntry = () => {
         toast.error("Something went wrong please try again", error);
       })
       .finally(() => {
+        router.refresh();
         setIsLoading(false);
       });
   };
