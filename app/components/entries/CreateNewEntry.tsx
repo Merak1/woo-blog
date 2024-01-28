@@ -4,9 +4,13 @@ import Input from "../inputs/Input";
 import { useState } from "react";
 import TextArea from "../inputs/TextArea";
 import Button from "../inputs/Button";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const CreateNewEntry = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isEntryCreated, setIsEntryCreated] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -20,7 +24,20 @@ const CreateNewEntry = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("Product data ", data);
+    setIsLoading(true);
+
+    await axios
+      .post("/api/blog", data)
+      .then(() => {
+        toast.success("Product created successfully");
+        setIsEntryCreated(true);
+      })
+      .catch((error: any) => {
+        toast.error("Something went wrong please try again", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -46,6 +63,7 @@ const CreateNewEntry = () => {
         label="content"
         disabled={isLoading}
         register={register}
+        required
         errors={errors}
       />
 
