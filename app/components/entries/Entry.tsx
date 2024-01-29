@@ -29,23 +29,16 @@ const Entry: React.FC<EntryProps> = ({
         <p>{createdAt}</p>
       </div>
       <div
-        className={`
-        w-3/5 flex flex-col break-words 
-        border-solid border-slate-400 
-        hover:bg-slate-200 
-        transition cursor-pointer  ${
-          isContentTruncated ? "  border-slate-500" : "border-slate-200"
-        }
-          `}
+        className="w-3/5 flex flex-col break-words"
         onClick={() => setIsContentTruncated((prevCheck) => !prevCheck)}
       >
-        <p className="cursor-pointer">
+        <div className="">
           <ShowTruncatedText
             isContentTruncated={isContentTruncated}
             truncatedContent={truncatedContent}
             content={content}
           />
-        </p>
+        </div>
       </div>
     </div>
   );

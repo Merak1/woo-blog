@@ -15,17 +15,26 @@ const ShowTruncatedText: React.FC<ShowTruncatedTextProps> = ({
   const isContentLongerThanMax = content.length > maxCharValue;
 
   if (!isContentLongerThanMax) {
-    return !isContentLongerThanMax && <p>{content}</p>;
+    return <>{!isContentLongerThanMax && <p>{content}</p>}</>;
   }
   return (
-    <>
+    <div
+      className={`
+        border-solid border-slate-400 
+        hover:bg-slate-200 
+        transition cursor-pointer  ${
+          isContentTruncated ? "  border-slate-500" : "border-slate-200"
+        }
+          `}
+    >
       {isContentTruncated && (
         <>
-          <p>{truncatedContent}</p> <p className="font-medium">"más..."</p>
+          <p>{truncatedContent}</p>
+          <span className="font-medium">"más..."</span>
         </>
       )}
       {!isContentTruncated && <p>{content}</p>}
-    </>
+    </div>
   );
 };
 
