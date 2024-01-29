@@ -9,14 +9,13 @@ export default function Home() {
   return (
     <>
       {entries && (
-        <div className="flex flex-col min-h-screen ">
-          <NavBar />
+        <div className="flex flex-col">
           <main>
-            <div className="flex ">
-              <div className=" w-2/5 p-2">
+            <div className="flex flex-col md:flex-row">
+              <div className=" w-full md:w-2/5 p-2 ">
                 <CreateNewEntry />
               </div>
-              <div className=" w-3/5 p-2">
+              <div className=" w-full md:w-3/5 p-2">
                 <ShowAllEntries />
               </div>
             </div>
