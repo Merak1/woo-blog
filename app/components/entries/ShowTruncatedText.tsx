@@ -30,7 +30,7 @@ const ShowTruncatedText: React.FC<ShowTruncatedTextProps> = ({
       {isContentTruncated && (
         <>
           <p>{truncatedContent}</p>
-          <span className="font-medium">"más..."</span>
+          <span className="font-medium">más...</span>
         </>
       )}
       {!isContentTruncated && <p>{content}</p>}
