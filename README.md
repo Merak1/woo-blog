@@ -43,3 +43,6 @@ Muchas consideraciones aparte, me apegué exclusivamente a lo que delimitaba la 
 De la misma forma la funcionalidad extra quedó muy cercana pero por cuestión de tiempos en el fin de semana se quedó en una implementación para el futúro.
 
 De la misma manera quedé a pocos pasos de poder completamente deployar una versión en vivo a Vercel pero la falta de tiempo me lo impidió.
+
+
+![image](https://github.com/Merak1/woo-blog/assets/19805451/0c0f5286-5a33-414e-9512-aea481ca84bf)
