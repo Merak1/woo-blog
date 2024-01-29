@@ -11,15 +11,16 @@ const ShowAllEntries = () => {
     handlePageChange,
     paginatedEntries,
     noResultsFound,
+    entrySearchResult,
     currentPage,
     handleRefreshEntries,
+    totalPages,
   } = useWooBlog();
 
   const onPageChange = (page: number) => {
     handlePageChange(page);
   };
 
-  const totalPages = Math.ceil(entries.length / pageSize);
   const pages = Array.from({ length: totalPages }, (value, index) => index + 1);
 
   return (

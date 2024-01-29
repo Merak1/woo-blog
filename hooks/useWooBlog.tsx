@@ -1,4 +1,5 @@
 // import { loadProducts } from "@/app/libs/loadProducts";
+import { EntryProps } from "@/app/types/entryType";
 import { Search } from "@/app/utils/Search";
 import { pageSize } from "@/app/utils/constants";
 import { Paginate } from "@/app/utils/paginate";
@@ -23,6 +24,7 @@ type BlogContextType = {
   handlePageChange: (page: number) => void;
   handleEntrySearch: (data: SearchDataType) => void;
   handleRefreshEntries: () => void;
+  totalPages: number;
 };
 
 interface SearchDataType {
@@ -43,6 +45,8 @@ export const BlogContextProvider = (props: Props) => {
   const [entrySearchResult, setEntrySearchResult] = useState<any | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchByType, setSearchByType] = useState<string>("");
+  const [totalPages, setTotalPages] = useState<number>(1);
+
   const [noResultsFound, setnoResultsFound] = useState<boolean>(false);
 
   useEffect(() => {
@@ -62,6 +66,7 @@ export const BlogContextProvider = (props: Props) => {
   useEffect(() => {
     if (entries) {
       PaginateResults(entries);
+      getPages(entries);
     }
   }, [entries]);
 
@@ -72,10 +77,16 @@ export const BlogContextProvider = (props: Props) => {
   }, [currentPage]);
 
   useEffect(() => {
+    if (entrySearchResult && entrySearchResult.length > 0) {
+      setnoResultsFound(false);
+    }
+  }, [entrySearchResult]);
+
+  useEffect(() => {
     if (searchQuery.length > 0) {
       const SearchedData = Search(entries, searchQuery, searchByType);
       setEntrySearchResult(SearchedData);
-
+      getPages(SearchedData);
       PaginateResults(SearchedData);
     } else if (
       searchQuery.length === 0 &&
@@ -84,6 +95,7 @@ export const BlogContextProvider = (props: Props) => {
     ) {
       if (entries) {
         PaginateResults(entries);
+        getPages(entries);
       }
     }
   }, [searchQuery, searchByType]);
@@ -114,6 +126,14 @@ export const BlogContextProvider = (props: Props) => {
     [currentPage]
   );
 
+  const getPages = (entries: any) => {
+    if (entries) {
+      const pages = Math.ceil(entries.length / pageSize);
+      setTotalPages(pages);
+    }
+    return null;
+  };
+
   const handleEntrySearch = useCallback(
     (data: SearchDataType) => {
       const { query, searchBy } = data;
@@ -134,6 +154,7 @@ export const BlogContextProvider = (props: Props) => {
     entrySearchResult,
     noResultsFound,
     handleRefreshEntries,
+    totalPages,
   };
 
   return <BlogContext.Provider value={value} {...props} />;

@@ -27,7 +27,6 @@ const SearchBar = () => {
   });
 
   const onSubmit = (data: any) => {
-    console.log("💙data from searchbar 💙", data);
     handleEntrySearch(data);
   };
   return (
