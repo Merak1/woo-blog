@@ -4,7 +4,6 @@ import { conn } from "@/app/libs/mysql";
 export async function GET() {
   try {
     const results = await conn.query("SELECT * FROM entry");
-    console.log("results ", results);
     return NextResponse.json(results);
   } catch (err) {
     return NextResponse.json({ message: err.message, status: 500 });
@@ -21,8 +20,6 @@ export async function POST(request) {
       title,
       content,
     });
-
-    console.log("result 🔵", result);
 
     return NextResponse.json({ id: result.insertId, user, title, content });
   } catch (err) {
