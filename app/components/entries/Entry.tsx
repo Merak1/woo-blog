@@ -2,13 +2,7 @@
 import { truncateText } from "@/app/utils/truncateText";
 import { useState } from "react";
 import ShowTruncatedText from "./ShowTruncatedText";
-export interface EntryProps {
-  id: string;
-  user: string;
-  title: string;
-  content: string;
-  createdAt: string;
-}
+import { EntryProps } from "@/app/types/entryType";
 
 const Entry: React.FC<EntryProps> = ({
   id,
