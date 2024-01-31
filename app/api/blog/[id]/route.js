@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
-import { conn } from "@/app/libs/mysql";
+import { connProd, connDev } from "@/app/libs/mysql";
 
 export async function GET(request, { params }) {
+  const conn = process.env.NODE_ENV == "development" ? connDev : connProd;
+
   try {
     const result = await conn.query("SELECT * FROM entry WHERE id = ?", [
       params.id,

@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import { conn } from "@/app/libs/mysql";
+import { connProd, connDev } from "@/app/libs/mysql";
 
 export async function GET() {
+  const conn = process.env.NODE_ENV == "development" ? connDev : connProd;
   try {
     const results = await conn.query("SELECT * FROM entry");
     return NextResponse.json(results);
@@ -10,6 +11,7 @@ export async function GET() {
   }
 }
 export async function POST(request) {
+  const conn = process.env.NODE_ENV == "development" ? connDev : connProd;
   try {
     const data = await request.json();
     const { id, user, title, content } = data;
