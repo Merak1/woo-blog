@@ -1,7 +1,7 @@
-// import { loadProducts } from "@/app/libs/loadProducts";
 import { EntryProps } from "@/app/types/entryType";
 import { Search } from "@/app/utils/Search";
 import { pageSize } from "@/app/utils/constants";
+import { loadProducts } from "@/app/utils/loadProducts";
 import { Paginate } from "@/app/utils/paginate";
 import axios from "axios";
 import {
@@ -54,7 +54,7 @@ export const BlogContextProvider = (props: Props) => {
     // }
     // set entries in initial load
 
-    loadProducts();
+    loadAndSetProducts();
   }, []);
 
   useEffect(() => {
@@ -100,9 +100,9 @@ export const BlogContextProvider = (props: Props) => {
     }
   }, [searchQuery, searchByType]);
 
-  const loadProducts = async () => {
+  const loadAndSetProducts = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/api/blog");
+      const data = await loadProducts();
       setEntries(data);
     } catch (e: any) {
       console.log(e.message);
@@ -118,7 +118,7 @@ export const BlogContextProvider = (props: Props) => {
 
   const handleRefreshEntries = useCallback(() => {
     setnoResultsFound(false);
-    loadProducts();
+    loadAndSetProducts();
   }, []);
 
   const handlePageChange = useCallback(
