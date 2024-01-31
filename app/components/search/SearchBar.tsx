@@ -11,6 +11,7 @@ const SearchBar = () => {
     handleEntrySearch,
     searchQuery,
     searchByType,
+    handleRefreshEntries,
     entrySearchResult,
   } = useWooBlog();
 
@@ -27,12 +28,22 @@ const SearchBar = () => {
   });
 
   const onSubmit = (data: any) => {
-    handleEntrySearch(data);
+    if (data.query === "") {
+      setIsLoading(true);
+      handleRefreshEntries();
+    }
+    try {
+      handleEntrySearch(data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <div className=" flex flex-col w-3/6 ml-auto mr-5 ">
       <input
-        {...register("query", { required: true })}
+        {...register("query")}
         type="text"
         autoComplete="off"
         placeholder="Search"
