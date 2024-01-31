@@ -7,12 +7,13 @@ import Button from "../inputs/Button";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useWooBlog } from "@/hooks/useWooBlog";
 
 const CreateNewEntry = () => {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const { handleRefreshEntries } = useWooBlog();
   const {
     register,
     handleSubmit,
@@ -40,6 +41,7 @@ const CreateNewEntry = () => {
       .finally(() => {
         reset();
         router.refresh();
+        handleRefreshEntries();
         setIsLoading(false);
       });
   };
