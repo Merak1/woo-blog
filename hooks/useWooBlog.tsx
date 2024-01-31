@@ -83,7 +83,7 @@ export const BlogContextProvider = (props: Props) => {
   }, [entrySearchResult]);
 
   useEffect(() => {
-    if (searchQuery.length > 0) {
+    if (searchQuery && searchQuery.length > 0) {
       const SearchedData = Search(entries, searchQuery, searchByType);
       setEntrySearchResult(SearchedData);
       getPages(SearchedData);
@@ -110,8 +110,10 @@ export const BlogContextProvider = (props: Props) => {
   };
 
   const PaginateResults = (entriesToDisplay: any) => {
-    const result = Paginate(entriesToDisplay, currentPage, pageSize);
-    setpaginatedEntries(result);
+    if (entriesToDisplay) {
+      const result = Paginate(entriesToDisplay, currentPage, pageSize);
+      setpaginatedEntries(result);
+    }
   };
 
   const handleRefreshEntries = useCallback(() => {
