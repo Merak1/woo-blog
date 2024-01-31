@@ -17,9 +17,9 @@ const Entry: React.FC<EntryProps> = ({
 
   return (
     <div className="py-2 px-5  my-2 w-full flex flex-row bg-slate-100 pt-5">
-      <div className="w-2/5 flex flex-col ">
-        <p className="font-bold">Title : {title}</p>
-        <p className=" font-medium">User: {user}</p>
+      <div className="w-2/5 flex flex-col p-2 ">
+        <p className="font-bold">Título: {title}</p>
+        <p className=" font-medium">Autor: {user}</p>
         <p>{createdAt}</p>
       </div>
       <div
